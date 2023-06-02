@@ -176,3 +176,11 @@ npm install --save-dev eslint-config-prettier
 npm install husky --save-dev
 npx husky install
 npx husky add .husky/pre-commit "npm test"
+
+
+# lint Staged
+
+sob gulo check na kore jara stage e jabe only tader check kroa hobe.
+
+npm install --save-dev lint-staged # requires further setup
+
