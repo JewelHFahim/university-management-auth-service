@@ -104,3 +104,75 @@ in script file write the commad
 npm start
 BOOM..!
 }
+
+**Next Day**
+copy this two line and paste it on the ts.config file
+{
+"include": ["src"], // which files to compile
+"exclude": ["node_modules"], // which files to skip
+}
+
+# Eslint & Prettier
+
+npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+
+create a file in root dire. name it .eslintrc and paste below code
+
+// .eslintrc
+{
+"parser": "@typescript-eslint/parser",
+"parserOptions": {
+"ecmaVersion": 12,
+"sourceType": "module",
+},
+"plugins": ["@typescript-eslint"],
+// HERE
+"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+
+"rules": {
+"@typescript-eslint/no-unused-vars": "error",
+"@typescript-eslint/consistent-type-definitions": ["error", "type"],
+},
+
+"env": {
+"browser": true,
+"es2021": true
+}
+}
+
+//may need to change ecmaVersion
+
+    "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "lint:fix": "eslint --fix",
+
+add this line in the package.json in script
+
+//create a file in root dir name it .eslintignore and write
+dist
+node_modules
+.env
+
+# install prettier
+
+npm install --save-dev prettier
+
+create a file name it .prttierrc an d write this below code on it
+
+{
+"semi": false,
+"singleQuote": true,
+"arrowParens": "avoid"
+}
+
+in package.json => script => add below command
+"prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+
+# Avoiding conflicts when working with ESLint and Prettier
+
+npm install --save-dev eslint-config-prettier
+
+
+# Husky
+npm install husky --save-dev
+npx husky install
+npx husky add .husky/pre-commit "npm test"
