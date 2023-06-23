@@ -1,19 +1,23 @@
-import express, { Application, Request, Response } from 'express'
-import cors from 'cors'
-const app: Application = express()
+import express, { Application } from 'express';
+import cors from 'cors';
+const app: Application = express();
 
-import userRouter from './app/modules/users/users.route'
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import routes from './app/routes';
 
-app.use(cors())
+app.use(cors());
 
 // parser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/v1/users/', userRouter)
+app.use('/api/v1', routes);
 
-app.get('/', async (req: Request, res: Response) => {
-  res.send('Server Working Succesfully..!')
-})
+// // Testing
+// app.get('/', async (req: Request, res: Response) => {
+//   Promise.reject(new Error('Unhandlerror'))
+// })
 
-export default app
+app.use(globalErrorHandler);
+
+export default app;
